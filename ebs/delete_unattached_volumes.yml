@@ -1,0 +1,56 @@
+policies:
+  - name: ebs-mark-unattached-volumes
+    resource: ebs
+    comments: |
+      mark any unattached ebs volumes so that they can be deleted after
+      365 days of not being attached
+    mode:
+      type: periodic
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+      schedule: "rate(1 day)"
+    filters:
+      - Attachments: []
+      - "tag:ignore": absent
+    actions:
+      - type: mark-for-op
+        op: delete
+        days: 365
+
+  - name: ebs-unmark-attached-volumes
+    resource: ebs
+    comments: |
+      unmark any attached ebs volumes that have since been attached
+    mode:
+      type: periodic
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+      schedule: "rate(1 day)"
+    filters:
+      - type: value
+        key: "Attachments[0].Device"
+        value: not-null
+      - "tag:ignore": absent
+    actions:
+      - unmark
+
+  - name: ebs-delete-marked-volumes
+    resource: ebs
+    comment: |
+      get rid of those pesky unattached volumes
+    mode:
+      type: periodic
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+      schedule: "rate(1 day)"
+    filters:
+      - type: marked-for-op
+        op: delete
+    actions:
+      - delete
+      - type: webhook
+        batch: true
+        method: POST
+        body: 'resources[].{group: GroupName, description: Description}'
+        url: https://webhook.site/226e1efa-ab67-403a-b175-eca1673f64cb
+        query-params:
+          policy: policy.name
+          region: region
+          count: 'resources[] | length(@)'

@@ -1,0 +1,25 @@
+policies:
+  - name: ec2-risky-security-groups
+    resource: security-group
+    description: |
+      Remove any rule from a security group that allows 0.0.0.0/0 or ::/0 (IPv6) ingress
+      and notify the user  who added the violating rule.
+    filters:
+      - "tag:SORTicket": absent
+      - or:
+            - type: ingress
+              Cidr:
+                value: "0.0.0.0/0"
+            - type: ingress
+              CidrV6:
+                value: "::/0"
+    actions:
+      - type: webhook
+        batch: true
+        method: POST
+        body: 'resources[].{group: GroupName, description: Description}'
+        url: https://webhook.site/226e1efa-ab67-403a-b175-eca1673f64cb
+        query-params:
+          policy: policy.name
+          region: region
+          count: 'resources[] | length(@)'
