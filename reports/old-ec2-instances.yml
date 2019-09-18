@@ -1,0 +1,18 @@
+policies:
+  - name: ec2-running-instances-60
+    resource: ec2
+    comment: |
+      Report showing instances running for more than 60 days
+    filters:
+      - "State.Name": running
+      - type: instance-age 
+        days: 60
+  
+  - name: ec2-stopped-instances-30
+    resource: ec2
+    comment: |
+      Report showing instances that have been stopped for more than 30 days
+    filters:
+      - "State.Name": stopped
+      - type: instance-age 
+        days: 30

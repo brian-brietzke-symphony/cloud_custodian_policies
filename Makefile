@@ -1,7 +1,7 @@
-.PHONY: default
+.PHONY: default install install-all reports
 .DEFAULT := default
 
-BIN = custodian run --output-dir=data/
+BIN = custodian run --output-dir=data/ --metrics aws
 YAML = ebs/*.yml ec2/*.yml ami/*.yml
 
 
@@ -13,3 +13,6 @@ install:
 
 install-all:
 	$(BIN) --region all $(YAML)
+
+reports:
+	$(BIN) --dryrun reports/*.yml
