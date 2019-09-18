@@ -1,15 +1,15 @@
 policies:
   - name: ebs-snapshot-delete-old-snaphots
     resource: ebs-snapshot
-    mode:
-      type: periodic
-      role: arn:aws:iam::{account_id}:role/CloudCustodian
-      schedule: "rate(1 day)"
+    # mode:
+    #   type: periodic
+    #   role: arn:aws:iam::{account_id}:role/CloudCustodian
+    #   schedule: "rate(1 day)"
     comment: |
       automatically removes snapshots older than one year
     filters:
       - type: age
-        days: 365
+        days: 30
         op: ge
     actions:
       - delete

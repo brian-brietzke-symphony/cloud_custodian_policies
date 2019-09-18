@@ -13,13 +13,13 @@ policies:
             - type: ingress
               CidrV6:
                 value: "::/0"
-    actions:
-      - type: webhook
-        batch: true
-        method: POST
-        body: 'resources[].{group: GroupName, description: Description}'
-        url: https://webhook.site/226e1efa-ab67-403a-b175-eca1673f64cb
-        query-params:
-          policy: policy.name
-          region: region
-          count: 'resources[] | length(@)'
+    # actions:
+    #   - type: webhook
+    #     batch: true
+    #     method: POST
+    #     body: 'resources[].{group: GroupName, description: Description}'
+    #     url: https://webhook.site/226e1efa-ab67-403a-b175-eca1673f64cb
+    #     query-params:
+    #       policy: policy.name
+    #       region: region
+    #       count: 'resources[] | length(@)'
