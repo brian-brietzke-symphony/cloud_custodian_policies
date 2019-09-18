@@ -1,6 +1,15 @@
 .PHONY: default
 .DEFAULT := default
 
+BIN = custodian run --output-dir=data/
+YAML = ebs/*.yml ec2/*.yml ami/*.yml
+
 
 default:
-	custodian run --output-dir=data/ ebs/*.yml ec2/*.yml ami/*.yml
+	$(BIN) --dryrun $(YAML)
+
+install:
+	$(BIN) $(YAML)
+
+install-all:
+	$(BIN) --region all $(YAML)

@@ -1,0 +1,14 @@
+policies:
+  - name: ec2-release-elastic-ip
+    resource: network-addr
+    mode:
+      type: periodic
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+      schedule: "rate(1 day)"
+    comment: |
+      automatically releases unassociated elastic ip address
+    filters:
+      - AllocationId: ...
+    actions:
+      - type: release
+        force: True

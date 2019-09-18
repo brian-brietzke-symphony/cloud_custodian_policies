@@ -1,17 +1,14 @@
 policies:
   - name: ami-deregister-old-ami
     resource: ami
-    # mode:
-    #   type: periodic
-    #   role: arn:aws:iam::{account_id}:role/CloudCustodian
-    #   schedule: "rate(1 day)"
+    mode:
+      type: periodic
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+      schedule: "rate(1 day)"
     comment: |
       automatically removes amis older than one year
     filters:
-      - type: value
-        value_type: age
-        key: CreationDate
-        value: 60
-        op: greater-than
+      - type: unused
+        value: true
     actions:
       - deregister
