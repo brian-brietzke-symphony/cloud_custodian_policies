@@ -1,5 +1,5 @@
 policies:
-  - name: ec2-running-instances-60
+  - name: r-ec2-running-instances-60
     resource: ec2
     comment: |
       Report showing instances running for more than 60 days
@@ -8,7 +8,7 @@ policies:
       - type: instance-age 
         days: 60
   
-  - name: ec2-stopped-instances-30
+  - name: r-ec2-stopped-instances-30
     resource: ec2
     comment: |
       Report showing instances that have been stopped for more than 30 days

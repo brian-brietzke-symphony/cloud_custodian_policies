@@ -1,5 +1,5 @@
 policies:
-  - name: ec2-unused-security-groups
+  - name: r-ec2-unused-security-groups
     resource: security-group
     comments: |
       list out all unused security groups
