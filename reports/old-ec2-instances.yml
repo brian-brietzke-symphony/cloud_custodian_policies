@@ -1,6 +1,10 @@
 policies:
   - name: r-ec2-running-instances-60
-    resource: ec2
+    resource: ec2    
+    mode:
+      type: periodic
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+      schedule: "rate(1 day)"
     comment: |
       Report showing instances running for more than 60 days
     filters:

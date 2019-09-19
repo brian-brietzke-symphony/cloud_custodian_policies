@@ -9,7 +9,7 @@ policies:
       automatically removes snapshots older than one year
     filters:
       - type: age
-        days: 30
+        days: 3
         op: ge
     actions:
       - delete

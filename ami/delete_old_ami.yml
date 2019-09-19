@@ -6,7 +6,7 @@ policies:
       role: arn:aws:iam::{account_id}:role/CloudCustodian
       schedule: "rate(1 day)"
     comment: |
-      automatically removes amis older than one year
+      automatically removes unused AMIs
     filters:
       - type: unused
         value: true

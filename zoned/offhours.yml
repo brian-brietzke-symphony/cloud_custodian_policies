@@ -1,0 +1,48 @@
+policies:
+  - name: zone-ec2-offhours-stop
+    comment: |
+      Stop EC2 instances after 5PM PST
+    resource: ec2
+    filters:
+      - type: offhour
+        default_tz: pt
+        tag: downtime
+        opt-out: true
+        offhour: 17
+    actions:
+      - stop
+
+  - name: zone-ec2-offhours-start
+    comment: |
+      Start EC2 instances after 6AM PST
+    resource: ec2
+    filters:
+      - type: onhour
+        onhour: 6
+        default_tz: pt
+    actions:
+      - start
+
+  - name: zone-asg-offhour-stop-22
+    resource: asg
+    comments: |
+      Suspend ASG after 4PM PST
+    filters:
+      - type: offhour
+        default_tz: pt
+        tag: custodian_downtime
+        offhour: 17
+    actions:
+      - suspend
+
+  - name: zone-asg-onhour-start-10
+    resource: asg
+    comments: |
+      Start ASG after 6AM PST
+    filters:
+      - type: onhour
+        default_tz: pt
+        tag: custodian_downtime
+        onhour: 6
+    actions:
+      - resume
