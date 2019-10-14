@@ -5,7 +5,7 @@ policies:
       type: periodic
       role: arn:aws:iam::{account_id}:role/CloudCustodian
       schedule: "rate(1 day)"
-    comments: |
+    description: |
       list out all unused security groups
     filters:
       - unused

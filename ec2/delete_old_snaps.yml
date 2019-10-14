@@ -5,11 +5,11 @@ policies:
       type: periodic
       role: arn:aws:iam::{account_id}:role/CloudCustodian
       schedule: "rate(1 day)"
-    comment: |
+    description: |
       automatically removes snapshots older than one year
     filters:
       - type: age
-        days: 3
+        days: 30
         op: ge
     actions:
       - delete

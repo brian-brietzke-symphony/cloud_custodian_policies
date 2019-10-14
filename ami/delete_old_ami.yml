@@ -1,11 +1,11 @@
 policies:
   - name: ami-deregister-old-ami
-    resource: ami
-    mode:
-      type: periodic
-      role: arn:aws:iam::{account_id}:role/CloudCustodian
-      schedule: "rate(1 day)"
-    comment: |
+    # resource: ami
+    # mode:
+    #   type: periodic
+    #   role: arn:aws:iam::{account_id}:role/CloudCustodian
+    #   schedule: "rate(1 day)"
+    description: |
       automatically removes unused AMIs
     filters:
       - type: unused

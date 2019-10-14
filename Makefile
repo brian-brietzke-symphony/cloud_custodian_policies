@@ -1,21 +1,21 @@
 .PHONY: default install install-all reports install-reports zoned
-.DEFAULT := default
+.DEFAULT: default
 
 BIN = custodian run --output-dir=data/ --metrics aws
-YAML = ebs/*.yml ec2/*.yml ami/*.yml
+ACTIONS = ebs/*.yml ec2/*.yml
+REPORTS = reports/*.yml
 REGION := all
 ZONED_REGIONS = --region eu-central-1 --region ca-central-1
-REPORTS = reports/*.yml
 
 
 default:
-	$(BIN) --dryrun $(YAML)
+	$(BIN) --dryrun $(ACTIONS)
 
 install:
-	$(BIN) $(YAML)
+	$(BIN) $(ACTIONS)
 
 install-all:
-	$(BIN) --region $(REGION) $(YAML) $(REPORTS)
+	$(BIN) $(ACTIONS) $(REPORTS)
 
 reports:
 	$(BIN) --dryrun $(REPORTS)
