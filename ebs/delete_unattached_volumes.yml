@@ -3,7 +3,7 @@ policies:
     resource: ebs
     comments: |
       mark any unattached ebs volumes so that they can be deleted after
-      365 days of not being attached
+      30 days of not being attached
     mode:
       type: periodic
       role: arn:aws:iam::{account_id}:role/CloudCustodian

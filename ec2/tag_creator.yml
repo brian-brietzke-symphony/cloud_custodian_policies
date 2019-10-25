@@ -7,8 +7,21 @@ policies:
       events:
         - RunInstances
     filters:
-      - "tag:CreatorName": absent
+      - "tag:CreatedBy": absent
     actions:
       - type: auto-tag-user
-        tag: CreatorName
+        tag: CreatedBy
         principal_id_tag: CreatorId
+      - type: tag
+        key: CloudCustodian
+
+  - name: s3-configure-standards-real-time
+    resource: s3
+    mode:
+      type: cloudtrail
+      events:
+        - CreateBucket
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+    actions:
+      - type: auto-tag-user
+        tag: CreatedBy

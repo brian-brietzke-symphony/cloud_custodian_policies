@@ -14,6 +14,10 @@ policies:
   
   - name: r-ec2-stopped-instances-30
     resource: ec2
+    mode:
+      type: periodic
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+      schedule: "rate(1 day)"
     description: |
       Report showing instances that have been stopped for more than 30 days
     filters:

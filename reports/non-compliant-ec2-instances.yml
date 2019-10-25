@@ -1,0 +1,16 @@
+policies:
+  - name: r-non-compliant-ec2-instances
+    resource: ec2    
+    mode:
+      type: periodic
+      role: arn:aws:iam::{account_id}:role/CloudCustodian
+      schedule: "rate(1 day)"
+    description: |
+      Report showing instances that are not compliant with tagging ontology
+    filters:
+      - or:
+        - "tag:Name": absent
+        - "tag:Owner": absent
+        - "tag:Org": absent
+        - "tag:Customer": absent
+  

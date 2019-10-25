@@ -84,7 +84,7 @@
             "width": 24,
             "height": 6,
             "properties": {
-                "markdown": "\n# Reports\nThe following show reports and graphs of items of interest that should be monitored.\n\n## Descriptions\n* **Instances Stopped for 30 or more days**:  Instances in this account that have been put in the stopped state 30 or more days ago and have not been turned back on.\n* **Instances running for 60 or more days**: Running total of instances for this account that have been _on_ for 60 or more days.\n* **Unused Security Groups**: Security groups that are not attached and not being used by other resources.\n* **Risky Security Groups**: Security Groups that have 0.0.0.0/0 as an ingress options that do not have a marked SOR ticket.\n"
+                "markdown": "\n# Reports\nThe following show reports and graphs of items of interest that should be monitored.\n\n## Descriptions\n* **Instances Stopped for 30 or more days**:  Instances in this account that have been put in the stopped state 30 or more days ago and have not been turned back on.\n* **Instances running for 60 or more days**: Running total of instances for this account that have been _on_ for 60 or more days.\n* **Unused Security Groups**: Security groups that are not attached and not being used by other resources.\n* **Risky Security Groups**: Security Groups that have 0.0.0.0/0 as an ingress options that do not have a marked SOR ticket.\n* **EC2 Instances out of Tag Compliance**: This are the instances that fail to meet with current tag compliance guidelines.\n"
             }
         },
         {
@@ -95,7 +95,9 @@
             "height": 6,
             "properties": {
                 "metrics": [
-                    [ "CloudMaid", "ResourceCount", "Policy", "r-ec2-running-instances-60", "Scope", "Policy", "ResType", "ec2" ]
+                    [ "CloudMaid", "ResourceCount", "Policy", "r-ec2-stopped-instances-30", "Scope", "Policy", "ResType", "ec2", { "visible": false } ],
+                    [ ".", "ResourceTime", ".", "r-ec2-running-instances-60", ".", ".", ".", ".", { "visible": false } ],
+                    [ ".", "ResourceCount", ".", ".", ".", ".", ".", "." ]
                 ],
                 "view": "timeSeries",
                 "stacked": false,
@@ -150,6 +152,22 @@
                 ],
                 "region": "us-east-1",
                 "title": "Risky Security Groups"
+            }
+        },
+        {
+            "type": "metric",
+            "x": 0,
+            "y": 24,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "view": "timeSeries",
+                "stacked": false,
+                "metrics": [
+                    [ "CloudMaid", "ResourceCount", "Policy", "r-non-compliant-ec2-instances", "Scope", "Policy", "ResType", "ec2" ]
+                ],
+                "region": "us-east-1",
+                "title": "EC2 Instances out of Tag Compliance"
             }
         }
     ]
