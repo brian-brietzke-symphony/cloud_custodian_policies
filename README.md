@@ -169,6 +169,23 @@
                 "region": "us-east-1",
                 "title": "EC2 Instances out of Tag Compliance"
             }
+        },
+        {
+            "type": "metric",
+            "x": 6,
+            "y": 24,
+            "width": 6,
+            "height": 6,
+            "properties": {
+                "metrics": [
+                    [ "CloudMaid", "ResourceCount", "Policy", "r-large-ec2-instances", "Scope", "Policy", "ResType", "ec2", { "stat": "Average" } ]
+                ],
+                "view": "timeSeries",
+                "stacked": false,
+                "region": "us-east-1",
+                "title": "Large EC2 Instances",
+                "period": 300
+            }
         }
     ]
 }
