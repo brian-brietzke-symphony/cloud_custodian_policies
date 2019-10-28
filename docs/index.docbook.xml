@@ -1,0 +1,123 @@
+<?xml version='1.0'?>
+<!DOCTYPE article [
+    <!ENTITY regions SYSTEM "regions.docbook.xml">
+]>
+<article xmlns="http://docbook.org/ns/docbook" version="5.0">
+    <info>
+        <title>Cloud Custodian</title>
+        <copyright>
+            <year>2019</year>
+            <holder>Brian Brietzke</holder>
+        </copyright>
+        <abstract>
+            <para>
+                This is a brief explanation of the various policies that we currently have defined and enabled in our 
+                environments.
+            </para>
+        </abstract>
+    </info>
+    <section xml:id='reports'>
+        <title>Reports</title>
+        <para>
+            These reports provide a read-only view of activity that takes place inside of the AWS account that they are installed for.  No changes are 
+            made based on the actions of these reports.
+        </para>
+        <para>
+            All reports output results to Cloud Watch and should have a Cloud Watch dashboard for easy viewing.
+        </para>
+        <section xml:id='tnc2i'>
+            <title>Tagged Non-Compliant EC2 Instances</title>
+            <para>
+                This report shows the number of instances that have been created that do not comply with the 
+                <ulink url="https://perzoinc.atlassian.net/wiki/spaces/SRE/pages/634328401/Ontology+Vocabulary">tagging policy as defined here</ulink>.
+            </para>
+<para>
+    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+</para>
+        </section>
+        <section xml:id='lei'>
+            <title>Large EC2 Instances</title>
+            <para>
+                This report shows the number of R4/R5 instances currently <emphasis>running</emphasis> in the given account.  It does not report on <emphasis>stopped</emphasis> 
+                instances.
+            </para>
+            <para>
+                The intention behind this report is to help gauge cost controls with the Dev and QA accounts.
+            </para>
+<para>
+    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+</para>
+        </section>
+        <section xml:id='6dir'>
+            <title>60 Day Instance Runtime</title>
+            <para>
+                This report will show the number of instances that have been in the <emphasis>running</emphasis> state for more than 60 days.
+            </para>
+            <para>
+                The intention behind this report is to gauge longevity of individual instances, as well as monitor the lifecycle behind instances.
+            </para>
+<para>
+    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+</para>
+        </section>
+        <section xml:id='3dis'>
+            <title>30 Day Instance Shutdown</title>
+            <para>
+                This report will show the number of instances that have been in the <emphasis>stopped</emphasis> state for more than 30 days.
+            </para>
+            <para>
+                The intention behind this report is to gauge longevity of individual instances, as well as monitor the lifecycle behind instances.
+            </para>
+<para>
+    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+</para>
+        </section>
+        <section xml:id='usg'>
+            <title>Unused Security Groups</title>
+            <para>
+                This report will show the number of security groups that are currently not attached to a resource, and in effect not used by our systems.
+            </para>
+<para>
+    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+</para>
+        </section>
+        <section xml:id='rsg'>
+            <title>Risky Security Groups</title>
+            <para>
+                This report will show the number of security groups that have 0.0.0.0/0 listed as one of the rules and that does not have tag 
+                named <emphasis>SORTicket</emphasis> with a valid SecOps ticket number.
+            </para>
+            <para>
+                This is to help manage the number of security groups that expose resources to the internet at large.
+            </para>
+<para>
+    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+</para>
+        </section>
+    </section>
+    <section xml:id='MaintenceWork'>
+        <title>Maintence Work</title>
+        <para>
+            The following sections describe a lambda function that will execute at least once per day to execute a particular task to change the 
+            current state of the resources in the AWS account that they are installed in.
+        </para>
+        <para>
+            All tasks output results to Cloud Watch and should have a Cloud Watch dashboard for easy viewing.
+        </para>
+        <section xml:id='rueip'>
+            <title>Release Unattached ElasticIPs</title>
+            <para>
+                This task releases unused or unattached ElasticIPs from the account.
+            </para>
+<para>
+    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+</para>
+        </section>
+        <section xml:id='dos'>
+            <title>Delete Old Snapshots</title>
+            <para>
+                This task will monitor the age of the EBS snapshots and will remove any snapshots that are over 180 days old.
+            </para>
+        </section>
+    </section>
+</article>
