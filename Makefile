@@ -2,11 +2,15 @@
 .DEFAULT: default
 
 BIN = custodian run --output-dir=data/ --metrics aws://?region=us-east-1
+BINR = custodian run --output-dir=data/
 ACTIONS = ebs/*.yml ec2/*.yml
 REPORTS = reports/*.yml
 REGION := all
 ZONED_REGIONS = --region eu-central-1 --region ca-central-1
 PROD_REGIONS = --region eu-west-1 --region  ap-southeast-1 --region us-east-1
+
+hooked:
+	$(BINR) reports/large-ec2-instances.yml
 
 default:
 	$(BIN) --dryrun $(ACTIONS)

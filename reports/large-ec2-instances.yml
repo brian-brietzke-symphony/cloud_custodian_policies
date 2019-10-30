@@ -1,12 +1,20 @@
 policies:
-  - name: r-large-ec2-instances
+  - name: r-ec2-large-instances
     resource: ec2    
-    mode:
-      type: periodic
-      role: arn:aws:iam::{account_id}:role/CloudCustodian
-      schedule: "rate(1 day)"
     description: |
       show large instances
+    actions:
+    - type: webhook
+      batch: true 
+      body: 'resources[].{ "instanceId": InstanceId, "instanceType": InstanceType, "tags": Tags }' 
+      url: https://webhook.site/752a0069-8d06-406d-8d5d-2b2143130e88
+      #url: http://dc1e90d5.ngrok.io/api/v1/custodian/handler
+      query-params:
+        policy_name: policy.name
+    # mode:
+    #   type: periodic
+    #   role: arn:aws:iam::{account_id}:role/CloudCustodian
+    #   schedule: "rate(1 day)"
     filters:
       - type: value
         key: InstanceType

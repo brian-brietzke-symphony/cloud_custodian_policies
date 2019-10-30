@@ -1,6 +1,6 @@
 <?xml version='1.0'?>
-<!DOCTYPE article [
-    <!ENTITY regions SYSTEM "regions.docbook.xml">
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook V5.0/EN" "http://www.oasis-open.org/docbook/xml/5.0/docbook.dtd" article [
+    <!ENTITY chap1 SYSTEM "regions.docbook.xml">
 ]>
 <article xmlns="http://docbook.org/ns/docbook" version="5.0">
     <info>
@@ -16,6 +16,15 @@
             </para>
         </abstract>
     </info>
+    <section xml:id='setup'>
+        <title>Local Setup</title>
+        <section>
+            <title>Install</title>
+        </section>
+        <section>
+            <title>Makefile</title>
+        </section>
+    </section>
     <section xml:id='reports'>
         <title>Reports</title>
         <para>
@@ -31,9 +40,9 @@
                 This report shows the number of instances that have been created that do not comply with the 
                 <ulink url="https://perzoinc.atlassian.net/wiki/spaces/SRE/pages/634328401/Ontology+Vocabulary">tagging policy as defined here</ulink>.
             </para>
-<para>
-    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
-</para>
+            <para>
+                This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+            </para>
         </section>
         <section xml:id='lei'>
             <title>Large EC2 Instances</title>
@@ -44,9 +53,9 @@
             <para>
                 The intention behind this report is to help gauge cost controls with the Dev and QA accounts.
             </para>
-<para>
-    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
-</para>
+            <para>
+                This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+            </para>
         </section>
         <section xml:id='6dir'>
             <title>60 Day Instance Runtime</title>
@@ -56,9 +65,9 @@
             <para>
                 The intention behind this report is to gauge longevity of individual instances, as well as monitor the lifecycle behind instances.
             </para>
-<para>
-    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
-</para>
+            <para>
+                This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+            </para>
         </section>
         <section xml:id='3dis'>
             <title>30 Day Instance Shutdown</title>
@@ -68,18 +77,15 @@
             <para>
                 The intention behind this report is to gauge longevity of individual instances, as well as monitor the lifecycle behind instances.
             </para>
-<para>
-    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
-</para>
+            <para>
+                This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
+            </para>
         </section>
         <section xml:id='usg'>
             <title>Unused Security Groups</title>
             <para>
                 This report will show the number of security groups that are currently not attached to a resource, and in effect not used by our systems.
             </para>
-<para>
-    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
-</para>
         </section>
         <section xml:id='rsg'>
             <title>Risky Security Groups</title>
@@ -90,9 +96,6 @@
             <para>
                 This is to help manage the number of security groups that expose resources to the internet at large.
             </para>
-<para>
-    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
-</para>
         </section>
     </section>
     <section xml:id='MaintenceWork'>
@@ -109,15 +112,13 @@
             <para>
                 This task releases unused or unattached ElasticIPs from the account.
             </para>
-<para>
-    This report is effective for the <emphasis>us-east-1</emphasis>, <emphasis>eu-west-1</emphasis>, <emphasis>ap-southeast-1</emphasis> regions.
-</para>
         </section>
         <section xml:id='dos'>
             <title>Delete Old Snapshots</title>
             <para>
                 This task will monitor the age of the EBS snapshots and will remove any snapshots that are over 180 days old.
             </para>
+            &chap1;
         </section>
     </section>
 </article>
